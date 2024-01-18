@@ -20,7 +20,7 @@
 		<module>kafka/kafka-model</module>
 		<module>kafka/kafka-admin</module>
 		<module>common-config</module>
-		<!--		<module>kafka/kafka-producer</module>-->
+				<module>kafka/kafka-producer</module>
 	</modules>
 	<packaging>pom</packaging>
 
@@ -34,6 +34,7 @@
 		<kafka-avro-serializer.version>7.4.0</kafka-avro-serializer.version>
 		<spring.kafka.version>3.0.9</spring.kafka.version>
 		<spring.retry.version>2.0.5</spring.retry.version>
+		<jakarta.version>1.3.5</jakarta.version>
 	</properties>
 
 	<repositories>
@@ -128,6 +129,11 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-starter-webflux</artifactId>
 				<version>${spring-boot.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>jakarta.annotation</groupId>
+				<artifactId>jakarta.annotation-api</artifactId>
+				<version>${jakarta.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
