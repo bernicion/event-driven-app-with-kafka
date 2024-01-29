@@ -128,11 +128,9 @@ public class KafkaAdminClient {
     private CreateTopicsResult doCreateTopics(RetryContext retryContext) {
         List<String> topicNames = kafkaConfigData.getTopicNamesToCreate();
         LOG.info("Creating {} topics(s), attempt {}", topicNames.size(), retryContext.getRetryCount());
-        List<NewTopic> kafkaTopics = topicNames.stream().map(topic -> new NewTopic(
-                topic.trim(),
-                kafkaConfigData.getNumOfPartitions(),
-                kafkaConfigData.getReplicationFactor()
-        )).collect(Collectors.toList());
+        List<NewTopic> kafkaTopics = topicNames.stream()
+                .map(this::createTopic)
+                .toList();
         return adminClient.createTopics(kafkaTopics);
     }
 
@@ -157,4 +155,11 @@ public class KafkaAdminClient {
         return topics;
     }
 
+    private NewTopic createTopic(String topic) {
+        return new NewTopic(
+                topic.trim(),
+                kafkaConfigData.getNumOfPartitions(),
+                kafkaConfigData.getReplicationFactor()
+        );
+    }
 }
